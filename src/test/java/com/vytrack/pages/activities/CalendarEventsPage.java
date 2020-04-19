@@ -51,16 +51,19 @@ public class CalendarEventsPage extends AbstracPageBase {
 
     public void enterCalendarEventTitle(String titleValue) {
         BrowserUtils.waitForPageToLoad(25);
-        BrowserUtils.wait(3);
+        BrowserUtils.wait(7);
         wait.until(ExpectedConditions.visibilityOf(title)).sendKeys(titleValue);
+        wait.until(ExpectedConditions.attributeToBe(title, "value", titleValue));
+//        wait.until(ExpectedConditions.attributeToBe())
     }
 
     public void enterCalendarEventDescription(String description) {
         //wait until frame is available and switch to it
         //BrowserUtils.waitForPageToLoad(20);
+        BrowserUtils.wait(5);
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(descriptionFrame));
         descriptionTextArea.sendKeys(description);
-       // BrowserUtils.wait(3);
+        wait.until(ExpectedConditions.textToBePresentInElement(descriptionTextArea, description));
 
         driver.switchTo().defaultContent();//exit from the frame
     }
