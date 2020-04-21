@@ -21,7 +21,6 @@ public class LoginStepDefinitions {
 
 
     }
-
     @When("user logs is as a sales manager")
     public void user_logs_is_as_a_sales_manager() {
         System.out.println("login as sales manager ");
@@ -34,8 +33,6 @@ public class LoginStepDefinitions {
         loginPage.login("storemanager85","UserUser123");
 
     }
-
-
 
     @Then("user should verify that title is a Dashboard")
     public void user_should_verify_that_title_is_a_Dashboard() {
@@ -60,7 +57,7 @@ public class LoginStepDefinitions {
          loginPage.login("user19","UserUser123");
     }
 
-
+// when user enters"storemanager85" username and "UserUser123"password
     @When("user enters {string} username and {string} password")
     public void user_enters_username_and_password(String string, String string2) {
         System.out.printf("Login with username %s and %s password\n", string, string2);

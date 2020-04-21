@@ -3,7 +3,7 @@ Feature: Login
   As user, I want to be able to login with username and password
   # Agile story
   #Test = Test Case =Scenario
-  #Test + Dataprovider =Scenario Ouline +Examples table
+  #Test + Dataprovider =Scenario Scenario Outline line +Examples table
   Background: open login page
     Given user is on the landing page
 
@@ -17,7 +17,7 @@ Feature: Login
     When user logs is as a store manager
     Then user should verify that title is a Dashboard
 
-  @driver
+  @driver @dashboard
   Scenario: Login as track Driver and verify that title is Dashboard
     When user logs is as a track driver
     Then user should verify that title is a Dashboard
