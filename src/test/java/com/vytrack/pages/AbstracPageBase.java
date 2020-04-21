@@ -32,6 +32,7 @@ public abstract class AbstracPageBase {
     }
 
     public String getCurrentName(){
+        BrowserUtils.wait(4);
         BrowserUtils.waitForPageToLoad(10);
         wait.until(ExpectedConditions.visibilityOf(currentUser));
 
@@ -43,7 +44,7 @@ public abstract class AbstracPageBase {
      * @param moduleName, like Vehicles, Vehicles Odometer and Vehicles Costs
      */
     public void navigateTo(String tabName, String moduleName){
-
+        BrowserUtils.wait(4);
         String tabNameXpath = "//span[@class='title title-level-1' and contains(text(),'" + tabName + "')]";
         String moduleXpath = "//span[@class='title title-level-2' and text()='" + moduleName + "']";
 
@@ -56,7 +57,7 @@ public abstract class AbstracPageBase {
 
 
         actions.moveToElement(tabElment).
-                pause(2000).
+                pause(4000).
                 click(moduleElment).
                 build().perform();
         //increase this wait rime if still failing

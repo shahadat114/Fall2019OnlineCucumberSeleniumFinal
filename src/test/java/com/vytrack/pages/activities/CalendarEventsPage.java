@@ -55,14 +55,16 @@ public class CalendarEventsPage extends AbstracPageBase {
     private WebElement viewPerPageToggle;
 
     public List<String> getViewPerPageOptions() {
+        BrowserUtils.wait(4);
         BrowserUtils.waitForPageToLoad(20);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[title='Create Calendar event']")));
         viewPerPageToggle.click();
-        BrowserUtils.wait(2);
+        BrowserUtils.wait(4);
         return BrowserUtils.getTextFromWebElements(viewPerPageElements);
     }
 
     public void enterCalendarEventTitle(String titleValue) {
+        BrowserUtils.wait(3);
         BrowserUtils.waitForPageToLoad(25);
         BrowserUtils.wait(7);
         wait.until(ExpectedConditions.visibilityOf(title)).sendKeys(titleValue);
@@ -73,7 +75,7 @@ public class CalendarEventsPage extends AbstracPageBase {
     public void enterCalendarEventDescription(String description) {
         //wait until frame is available and switch to it
         //BrowserUtils.waitForPageToLoad(20);
-        BrowserUtils.wait(5);
+        BrowserUtils.wait(3);
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(descriptionFrame));
         descriptionTextArea.sendKeys(description);
         wait.until(ExpectedConditions.textToBePresentInElement(descriptionTextArea, description));
@@ -81,27 +83,33 @@ public class CalendarEventsPage extends AbstracPageBase {
         driver.switchTo().defaultContent();//exit from the frame
     }
 
-    public void clickOnSaveAndClose() {
+    public void clickOnSaveAndClose()
+    {
+        BrowserUtils.wait(3);
         wait.until(ExpectedConditions.elementToBeClickable(saveAndClose)).click();
     }
 
     public String getGeneralInfoTitleText() {
+        BrowserUtils.wait(2);
         BrowserUtils.waitForPageToLoad(20);
         return generalInfoTitle.getText();
     }
 
     public String getGeneralInfoDescriptionText() {
+        BrowserUtils.wait(2);
         BrowserUtils.waitForPageToLoad(20);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[text()='Description']/following-sibling::div//div")));
         return generalInfoDescription.getText();
     }
 
     public List<String> getColumNames() {
+        BrowserUtils.wait(2);
         BrowserUtils.waitForPageToLoad(15);
         return BrowserUtils.getTextFromWebElements(columsName);
     }
 
     public String getOwnerName() {
+        BrowserUtils.wait(2);
         BrowserUtils.waitForPageToLoad(10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".select2-chosen")));
         wait.until(ExpectedConditions.visibilityOf(owner));
@@ -110,6 +118,7 @@ public class CalendarEventsPage extends AbstracPageBase {
     }
 
     public void clickToCreateCalendarEvent() {
+        BrowserUtils.wait(2);
         BrowserUtils.waitForPageToLoad(20);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[title='Create Calendar event']")));
         wait.until(ExpectedConditions.elementToBeClickable(createCalendarEvent)).click();
@@ -117,7 +126,7 @@ public class CalendarEventsPage extends AbstracPageBase {
     }
 
     public String getStartDate() {
-
+        BrowserUtils.wait(2);
         BrowserUtils.waitForPageToLoad(20);
         BrowserUtils.scrollTo(startDate);
         wait.until(ExpectedConditions.visibilityOf(startDate));
@@ -126,12 +135,14 @@ public class CalendarEventsPage extends AbstracPageBase {
     }
 
     public String getStartTime() {
+        BrowserUtils.wait(2);
         BrowserUtils.waitForPageToLoad(10);
         wait.until(ExpectedConditions.visibilityOf(startTime));
         return startTime.getAttribute("value");
     }
 
     public String getEndTime() {
+        BrowserUtils.wait(2);
         BrowserUtils.waitForPageToLoad(10);
         wait.until(ExpectedConditions.visibilityOf(endTime));
         return endTime.getAttribute("value");

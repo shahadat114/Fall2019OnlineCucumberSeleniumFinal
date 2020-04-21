@@ -26,7 +26,6 @@ public class LoginPage extends AbstracPageBase {
     @FindBy(css = "[class='alert alert-error']")
     private WebElement warningMessage;
 
-
     public String getWariningMessage(){
         return warningMessage.getText();
     }
