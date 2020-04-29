@@ -40,9 +40,6 @@ public class CalendarEventsPage extends AbstracPageBase {
     @FindBy(id = "tinymce")
     private WebElement descriptionTextArea;
 
-    @FindBy(css = "[class='btn-group pull-right'] > button")
-    private WebElement saveAndClose;
-
     @FindBy(xpath = "(//div[@class='control-label'])[1]")
     private WebElement generalInfoTitle;
 
@@ -81,12 +78,6 @@ public class CalendarEventsPage extends AbstracPageBase {
         wait.until(ExpectedConditions.textToBePresentInElement(descriptionTextArea, description));
 
         driver.switchTo().defaultContent();//exit from the frame
-    }
-
-    public void clickOnSaveAndClose()
-    {
-        BrowserUtils.wait(3);
-        wait.until(ExpectedConditions.elementToBeClickable(saveAndClose)).click();
     }
 
     public String getGeneralInfoTitleText() {
@@ -147,5 +138,4 @@ public class CalendarEventsPage extends AbstracPageBase {
         wait.until(ExpectedConditions.visibilityOf(endTime));
         return endTime.getAttribute("value");
     }
-
 }

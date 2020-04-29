@@ -16,9 +16,8 @@ public class LoginStepDefinitions {
     @Given("user is on the landing page")
     public void user_is_on_the_landing_page() {
         System.out.println("open the login page ");
-        String URL = ConfigurationReader.getProperty("qa1");
+        String URL = ConfigurationReader.getProperty("qa3");
         Driver.getDriver().get(URL);
-
 
     }
     @When("user logs is as a sales manager")
@@ -37,20 +36,11 @@ public class LoginStepDefinitions {
     @Then("user should verify that title is a Dashboard")
     public void user_should_verify_that_title_is_a_Dashboard() {
         System.out.println("Verify the title is Dashboard");
-
         BrowserUtils.waitForPageToLoad(10);
         BrowserUtils.wait(2);
         Assert.assertEquals("Dashboard",Driver.getDriver().getTitle());
 
-
     }
-
-//    @When("user logs is as a track driver")
-//    public void user_logs_is_as_a_track_driver() {
-//        System.out.println("login as a driver");
-//        loginPage.login("user19","UserUser123");
-//    }
-
     @When("user logs is as a track driver")
     public void user_logs_is_as_a_track_driver() {
         System.out.println("login as a driver");
@@ -68,8 +58,20 @@ public class LoginStepDefinitions {
     public void user_navigates_to_and(String tab, String module) {
         System.out.printf("User clicks on the %s tab and navigates to %s  module\n",tab,module);
         loginPage.navigateTo(tab, module);
+    }
+    @Then("user name should be {string}")
+    public void user_name_should_be(String string) {
+        Assert.assertEquals(string, loginPage.getCurrentUserName());
 
     }
+    @When("user logs in as {string}")
+    public void user_logs_in_as(String userType) {
+        loginPage.login(userType);
 
-
+    }
+    @Then("user verifies that page title is {string}")
+    public void user_verifies_that_page_title_is(String string) {
+        System.out.println("Verify that page title is: " + string);
+        Assert.assertEquals(string, Driver.getDriver().getTitle());
+    }
 }

@@ -19,49 +19,65 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * elements from that menu
  */
 public abstract class AbstracPageBase {
-
     protected WebDriver driver = Driver.getDriver();
-    protected WebDriverWait wait = new WebDriverWait(driver,25);
+    protected WebDriverWait wait = new WebDriverWait(driver, 25);
 
     @FindBy(css = "#user-menu > a")
     protected WebElement currentUser;
 
-    public AbstracPageBase(){
-        PageFactory.initElements(driver,this);
+    @FindBy(css = "[class='btn-group pull-right'] > button")
+    protected WebElement saveAndClose;
 
+    public AbstracPageBase() {
+        PageFactory.initElements(driver, this);
     }
 
-    public String getCurrentName(){
-        BrowserUtils.wait(4);
+    public void clickOnSaveAndClose() {
+        BrowserUtils.wait(3);
+        wait.until(ExpectedConditions.elementToBeClickable(saveAndClose)).click();
+    }
+
+    public String getCurrentUserName() {
         BrowserUtils.waitForPageToLoad(10);
         wait.until(ExpectedConditions.visibilityOf(currentUser));
-
         return currentUser.getText().trim();
     }
+
     /**
      * Method for vytrack navigation. Provide tab name and module name to navigate
-     * @param tabName, like Dashboards, Fleet or Customers
+     *
+     * @param tabName,    like Dashboards, Fleet or Customers
      * @param moduleName, like Vehicles, Vehicles Odometer and Vehicles Costs
      */
-    public void navigateTo(String tabName, String moduleName){
-        BrowserUtils.wait(4);
+    public void navigateTo(String tabName, String moduleName) {
         String tabNameXpath = "//span[@class='title title-level-1' and contains(text(),'" + tabName + "')]";
         String moduleXpath = "//span[@class='title title-level-2' and text()='" + moduleName + "']";
 
-        WebElement tabElment = driver.findElement(By.xpath(tabNameXpath));
-        WebElement moduleElment = driver.findElement(By.xpath(moduleXpath));
+        WebElement tabElement = driver.findElement(By.xpath(tabNameXpath));
+        WebElement moduleElement = driver.findElement(By.xpath(moduleXpath));
 
-        Actions actions= new Actions(driver);
-
+        Actions actions = new Actions(driver);
         BrowserUtils.wait(4);
-
-
-        actions.moveToElement(tabElment).
-                pause(4000).
-                click(moduleElment).
+        actions.moveToElement(tabElement).
+                pause(2000).
+                click(moduleElement).
                 build().perform();
+
         //increase this wait rime if still failing
-        BrowserUtils.wait(7);
+        BrowserUtils.wait(4);
+        waitForLoaderMask();
     }
 
-}
+    /**
+     * this method can be used to wait until that terrible loader mask (spinning wheel) will be gone
+     * if loader mask is present, website is loading some data and you cannot perform any operations
+     */
+
+    public void waitForLoaderMask() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("[class*='loader-mask']")));
+    }
+
+    }
+
+
+

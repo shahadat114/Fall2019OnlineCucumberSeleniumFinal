@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends AbstracPageBase {
+public  class LoginPage extends AbstracPageBase {
 
     @FindBy(id = "prependedInput")
     private WebElement username;
@@ -47,5 +47,19 @@ public class LoginPage extends AbstracPageBase {
        BrowserUtils.waitForPageToLoad(10);
         BrowserUtils.wait(3);
     }
-
+public void login(String role){
+      String userName="";
+    if (role.equalsIgnoreCase("driver")){
+        userName = "user15";
+    }else if (role.equalsIgnoreCase("sales manager")){
+        userName = "salesmanager110";
+    }else if (role.equalsIgnoreCase("store manager")){
+        userName = "storemanager85";
+    }else {
+        throw new RuntimeException("Invalid role!");
+    }
+    System.out.println("Login as "+role);
+    login(userName, "UserUser123");
+    }
 }
+
